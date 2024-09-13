@@ -1,0 +1,110 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathrsfs}
+\usepackage{latexsym}
+\usepackage{bm}
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{physics}
+\usepackage{braket}
+\usepackage{float}
+
+
+
+\title{Notes on density functional theory}
+\author{Ryota Masuki}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Pseudopotential methods}
+\subsection{Projector Augmented Wave (PAW) method}
+\subsubsection{Theory}
+The all electron wavefunction $\ket{\Psi}$ is written by 
+\begin{align}
+\ket{\Psi} = \mathcal{T} \ket{\widetilde{\Psi}}
+\end{align}
+using the pseudo wavefunction $\ket{\widetilde{\Psi}}$. Here, the PAW transformation, which transforms the PS wavefunction to AE wavefunction, is 
+\begin{align}
+  \mathcal{T} = 1 + \sum_{\bm{R}\alpha} \mathcal{T}_{\bm{R}\alpha},
+\end{align}
+where $\mathcal{T}_{\bm{R}\alpha}$ operates in a sphere surrounding the atom $\bm{R}\alpha$.
+
+Here, for a set of complete set in the sphere $\ket{\widetilde{\phi}_{\bm{R}\alpha, nL}}$, we assume that 
+\begin{align}
+  \ket{{\phi}_{\bm{R}\alpha, nL}} = (1 + \mathcal{T}_{\bm{R}\alpha}) \ket{\widetilde{\phi}_{\bm{R}\alpha, nL}}.
+\end{align}
+Then, using the projecor functions $\ket{\widetilde{p}_{\bm{R}\alpha,nL}}$, which satisfies
+\begin{align} 
+  \sum_{nL} \ket{\widetilde{\phi}_{\bm{R}\alpha, nL}} \bra{\widetilde{p}_{\bm{R}\alpha, nL}} = 1
+\end{align}
+for all atoms $\bm{R}\alpha$, the PAW transformation can be explicitly written as 
+\begin{align}
+  \mathcal{T} = 1 + \sum_{i = (\bm{R}\alpha, nL)} (\ket{\phi_i} - \ket{\widetilde{\phi}_i}) \bra{\widetilde{p}_i}.
+\end{align}
+
+\subsubsection{Operators}
+For any one-body operator $A$, 
+\begin{align}
+  \widetilde{A} 
+  &= \mathcal{T}^\dag A \mathcal{T}
+  \\&=
+  A + 
+  \sum_{i = (\bm{R}_1\alpha_1,n_1L_1),j = (\bm{R}_2\alpha_2, n_2 L_2)}
+  \ket{\widetilde{p}_i}
+  (\braket{\phi_i | A | \phi_j} - 
+  \braket{\widetilde{\phi}_i | A | \widetilde{\phi}_j})
+  \bra{\widetilde{p}_j}
+  + \Delta A
+\end{align}
+Please see Ref.~\cite{PhysRevB.50.17953} for details of $\Delta A$.
+When $A$ is a semilocal operator, $\Delta A$ vanishes, and the second term can be rewritten as 
+\begin{align}
+  \widetilde{A} 
+  &= \mathcal{T}^\dag A \mathcal{T}
+  \\&=
+  A + 
+  \sum_{\bm{R}\alpha,n_1L_1, n_2 L_2}
+  \ket{\widetilde{p}_{\bm{R}\alpha,n_1L_1}}
+  (\braket{\phi_{\bm{R}\alpha,n_1L_1} | A | \phi_{\bm{R}\alpha,n_2L_2}} - 
+  \braket{\widetilde{\phi}_{\bm{R}\alpha,n_1L_1} | A | \widetilde{\phi}_{\bm{R}\alpha,n_2L_2}})
+  \bra{\widetilde{p}_{\bm{R}\alpha,n_2L_2}}
+\end{align}
+The charge density is given by
+\begin{align}
+  n(\bm{r}) = \widetilde{n}(\bm{r}) + n^1(\bm{r}) - \widetilde{n}^1(\bm{r}),
+\end{align}
+where
+\begin{align}
+\widetilde{n}(\bm{r}) = \frac{1}{N} \sum_{n\bm{k}} f_{n\bm{k}} |\psi_{n\bm{k}}(\bm{r})|^2 
+\end{align}
+\begin{align}
+  {n}^1(\bm{r}) = \frac{1}{N} \sum_{n\bm{k}} \sum_{\bm{R}\alpha, nL, n'L'} f_{n\bm{k}} 
+  \braket{\psi_{n\bm{k}} | \widetilde{p}_{\bm{R}\alpha, nL}} 
+  \phi^*_{\bm{R}\alpha, nL}(\bm{r})
+  \phi^*_{\bm{R}\alpha, n'L'}(\bm{r})
+  \braket{ \widetilde{p}_{\bm{R}\alpha, n'L'} | \psi_{n\bm{k}} } 
+\end{align}
+\begin{align}
+  \widetilde{n}^1(\bm{r}) = \frac{1}{N} \sum_{n\bm{k}} \sum_{\bm{R}\alpha, nL, n'L'} f_{n\bm{k}} 
+  \braket{\psi_{n\bm{k}} | \widetilde{p}_{\bm{R}\alpha, nL}} 
+  \widetilde{\phi}^*_{\bm{R}\alpha, nL}(\bm{r})
+  \widetilde{\phi}^*_{\bm{R}\alpha, n'L'}(\bm{r})
+  \braket{ \widetilde{p}_{\bm{R}\alpha, n'L'} | \psi_{n\bm{k}} } 
+\end{align}
+
+\begin{figure}[H]
+  \begin{center}
+  \includegraphics[width=100mm]{figures/PAW_charge.png}
+  \caption{Schematic of the PAW charge densities.}
+  \end{center}
+\end{figure}
+
+
+
+\bibliographystyle{unsrt}
+\bibliography{reference}
+\end{document}
