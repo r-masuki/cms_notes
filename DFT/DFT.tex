@@ -79,21 +79,21 @@ The charge density is given by
 \end{align}
 where
 \begin{align}
-\widetilde{n}(\bm{r}) = \frac{1}{N} \sum_{n\bm{k}} f_{n\bm{k}} |\psi_{n\bm{k}}(\bm{r})|^2 
+\widetilde{n}(\bm{r}) =  \sum_{n\bm{k}} f_{n\bm{k}} |\widetilde{\psi}_{n\bm{k}}(\bm{r})|^2 
 \end{align}
 \begin{align}
-  {n}^1(\bm{r}) = \frac{1}{N} \sum_{n\bm{k}} \sum_{\bm{R}\alpha, nL, n'L'} f_{n\bm{k}} 
-  \braket{\psi_{n\bm{k}} | \widetilde{p}_{\bm{R}\alpha, nL}} 
+  {n}^1(\bm{r}) =  \sum_{n\bm{k}} \sum_{\bm{R}\alpha, nL, n'L'} f_{n\bm{k}} 
+  \braket{\widetilde{\psi}_{n\bm{k}} | \widetilde{p}_{\bm{R}\alpha, nL}} 
   \phi^*_{\bm{R}\alpha, nL}(\bm{r})
   \phi^*_{\bm{R}\alpha, n'L'}(\bm{r})
-  \braket{ \widetilde{p}_{\bm{R}\alpha, n'L'} | \psi_{n\bm{k}} } 
+  \braket{ \widetilde{p}_{\bm{R}\alpha, n'L'} | \widetilde{\psi}_{n\bm{k}} } 
 \end{align}
 \begin{align}
-  \widetilde{n}^1(\bm{r}) = \frac{1}{N} \sum_{n\bm{k}} \sum_{\bm{R}\alpha, nL, n'L'} f_{n\bm{k}} 
-  \braket{\psi_{n\bm{k}} | \widetilde{p}_{\bm{R}\alpha, nL}} 
+  \widetilde{n}^1(\bm{r}) =  \sum_{n\bm{k}} \sum_{\bm{R}\alpha, nL, n'L'} f_{n\bm{k}} 
+  \braket{\widetilde{\psi}_{n\bm{k}} | \widetilde{p}_{\bm{R}\alpha, nL}} 
   \widetilde{\phi}^*_{\bm{R}\alpha, nL}(\bm{r})
   \widetilde{\phi}^*_{\bm{R}\alpha, n'L'}(\bm{r})
-  \braket{ \widetilde{p}_{\bm{R}\alpha, n'L'} | \psi_{n\bm{k}} } 
+  \braket{ \widetilde{p}_{\bm{R}\alpha, n'L'} | \widetilde{\psi}_{n\bm{k}} } 
 \end{align}
 
 \begin{figure}[H]
@@ -116,11 +116,13 @@ Under LDA, the total energy functional is
 where $n^Z$ is the (charge) density of nuclei in the unit of $-e$.
 With a cumbersome calculation, we can prove that $E = \widetilde{E} + E^1 - \widetilde{E}^1$ with
 \begin{align} 
-  \widetilde{E} = 
+  \widetilde{E} &= 
   \sum_{n\bm{k}} f_{n\bm{k}} \braket{\widetilde{\psi}_{n\bm{k}} | \frac{-\hbar^2\nabla^2}{2m} |\widetilde{\psi}_{n\bm{k}} }
   + \frac{e^2}{2}\int d\bm{r}d\bm{r}' \frac{(\widetilde{n} + \hat{n})(\widetilde{n} + \hat{n})}{|\bm{r}-\bm{r}'|}
+  \nonumber \\&
   + \int d\bm{r} \widetilde{n}(\bm{r})\bar{v}(\bm{r})
   + \int d\bm{r} \widetilde{n}(\bm{r})\epsilon_{xc}(\widetilde{n}(\bm{r})),
+  \label{eq:tildeE}
 \end{align}
 \begin{align} 
   {E}^1 &= 
