@@ -258,6 +258,7 @@ The last two terms can also be estimated with an integral on the Fourier mesh li
   \nonumber\\&
   + \frac{e^2}{2}\int_{RG} d\bm{r}d\bm{r}' \frac{({n}^1 + n^Z)({n}^1 + n^Z)}{|\bm{r}-\bm{r}'|}
   + \int_{RG} d\bm{r} {n}^1(\bm{r})\epsilon_{xc}({n}^1(\bm{r})),
+  \label{eq:E1_numerical_calculation}
 \end{align}
 \begin{align} 
   \widetilde{E}^1 &= 
@@ -269,11 +270,206 @@ The last two terms can also be estimated with an integral on the Fourier mesh li
   + \frac{e^2}{2}\int_{RG} d\bm{r}d\bm{r}' \frac{(\widetilde{n}^1 + \hat{n})(\widetilde{n}^1 + \hat{n})}{|\bm{r}-\bm{r}'|}
   + \int_{RG} d\bm{r} \widetilde{n}^1(\bm{r})\bar{v}(\bm{r})
   + \int_{RG} d\bm{r} \widetilde{n}^1(\bm{r})\epsilon_{xc}(\widetilde{n}^1(\bm{r})),
+  \label{eq:tildeE1_numerical_calculation}
 \end{align}
 where $RG$ stands for radial grid integration. $\int_{RG}$ for terms like $\int_{RG} d\bm{r} n(\bm{r})\epsilon_{xc}(n(\bm{r}))$ are defined as Eq. (29) in Ref.~\cite{PhysRevB.50.17953}. 
 It seems that the Coulom integrals for $({n}^1 + n^Z)$ and $(\widetilde{n}^1 + \hat{n})$ can be estimated using a radial grid integration, but I haven't confirmed the exact details.  
 I haven't followed the details of $\int_{RG} d\bm{r} \widetilde{n}^1(\bm{r})\bar{v}(\bm{r})$ as well, which I suppose depends on how to determine $\bar{v}$.
 
+\subsubsection{Hamilton operator}
+The kinetic energy term can be written as $\Tr (\widetilde{\rho} \widetilde{T})$, where
+\begin{align}
+  \widetilde{\rho} = \sum_{n\bm{k}} \ket{\widetilde{\psi}_{n\bm{k}}} \bra{\widetilde{\psi}_{n\bm{k}}}
+\end{align}
+\begin{align}
+  \widetilde{T} 
+  &=
+  \frac{-\hbar^2 \nabla^2}{2m} 
+  \nonumber
+  \\&+ 
+  \sum_{\bm{R}\alpha nL n'L'}
+  \ket{\widetilde{p}_{\bm{R}\alpha nL}}
+  \Bigl(
+    \braket{\phi_{\bm{R}\alpha nL} | \frac{-\hbar^2 \nabla^2}{2m} | \phi_{\bm{R}\alpha n'L'}} 
+    - 
+    \braket{\widetilde{\phi}_{\bm{R}\alpha nL} | \frac{-\hbar^2 \nabla^2}{2m} | \widetilde{\phi}_{\bm{R}\alpha n'L'}}
+  \Bigr)
+  \bra{\widetilde{p}_{\bm{R}\alpha n'L'}}.
+\end{align}
+We consider that $E - \Tr (\widetilde{\rho} \widetilde{T})$ as a functional of $\widetilde{n}, n^1, \widetilde{n}^1$, and $Q_{\bm{R}\alpha L}$ as defined in 
+Eqs. (\ref{eq:tildeE_numerical_calculation})$\sim$(\ref{eq:tildeE1_numerical_calculation}).
+Note that these definition includes the method of numerical calculation because the Hamiltonian operator and the numerator needs to be consistent not only formally but also numerically~\cite{PhysRevB.50.17953}. The derivative of the energy functional with respect to the pseudo charge density operator is 
+\begin{align}
+  \frac{\partial E}{\partial \widetilde{\rho}}
+  &=
+  \frac{\partial \Tr(\widetilde{\rho}\widetilde{T})}{\partial \widetilde{\rho}}
+  +
+  \int d\bm{r} 
+  \frac{\partial E}{\partial \widetilde{n}(\bm{r})}
+  \frac{\partial \widetilde{n}(\bm{r})}{\partial \widetilde{\rho}}
+  \nonumber
+  \\&
+  +
+  \int d\bm{r} 
+  \Bigl(
+    \frac{\partial E}{\partial n^1(\bm{r})}
+    + 
+    \sum_{\bm{R}\alpha L} \frac{\partial E}{\partial Q_{\bm{R}\alpha L}} 
+    \frac{\partial Q_{\bm{R}\alpha L}}{\partial n^1(\bm{r})}
+  \Bigr)
+  \frac{\partial {n}^1(\bm{r})}{\partial \widetilde{\rho}}
+  + 
+  \int d\bm{r} 
+  \Bigl(
+    \frac{\partial E}{\partial \widetilde{n}^1(\bm{r})}
+    + 
+    \sum_{\bm{R}\alpha L} \frac{\partial E}{\partial Q_{\bm{R}\alpha L}} 
+    \frac{\partial Q_{\bm{R}\alpha L}}{\partial \widetilde{n}^1(\bm{r})}
+  \Bigr)
+  \frac{\partial \widetilde{n}^1(\bm{r})}{\partial \widetilde{\rho}}
+\end{align}
+From Eqs. (\ref{eq:tildeE_numerical_calculation})$\sim$(\ref{eq:tildeE1_numerical_calculation}),
+\begin{align}
+  \widetilde{v}(\bm{r}) &= 
+  \frac{\partial E}{\partial \widetilde{n}(\bm{r})}
+  \nonumber
+  \\&=
+  e^2 \int_M d\bm{r}' \frac{\widetilde{n} + \hat{n}'(\bm{r}')}{|\bm{r}-\bm{r}'|}
+  + \hat{v}(\bm{r}) + \bar{v}(\bm{r})
+  + \mu_{xc}(\widetilde{n}(\bm{r})),
+\end{align}
+where
+\begin{align}
+  \mu_{xc}(n) = \frac{\partial (n\epsilon_{xc}(n))}{\partial n}.
+\end{align}
+Note that 
+$e^2 \int_M d\bm{r}' \frac{\widetilde{n} + \hat{n}'(\bm{r}')}{|\bm{r}-\bm{r}'|}
++ \hat{v}(\bm{r})
+= 
+e^2 \int_M d\bm{r}' \frac{\widetilde{n} + \hat{n}(\bm{r}')}{|\bm{r}-\bm{r}'|}
+$. Thus, $\hat{n}'$ can be eliminated, which is because $\hat{n}'$ is just an auxiliary term introduced to calculate the second term in the RHS of Eq. (\ref{eq:tildeE}).
+Next, we estimate
+\begin{align}
+  \frac{\partial E}{\partial Q_{\bm{R}\alpha L}} 
+  &=
+  \int d\bm{r}\frac{\partial E}{\partial \hat{n}(\bm{r})} \frac{\partial \hat{n}(\bm{r})}{\partial Q_{\bm{R}\alpha L}} 
+  +
+  \int d\bm{r}\frac{\partial E}{\partial \hat{n}'(\bm{r})} \frac{\partial \hat{n}'(\bm{r})}{\partial Q_{\bm{R}\alpha L}} 
+  \nonumber
+  \\&=
+  e^2\int d\bm{r} g_{\bm{R}\alpha L}(\bm{r})
+  \Bigl(
+    \int_M d\bm{r}' \frac{\widetilde{n}(\bm{r}')}{|\bm{r} - \bm{r}'|}
+    + 
+    \int_A d\bm{r}' \frac{\hat{n}(\bm{r}')}{|\bm{r} - \bm{r}'|}
+    -
+    \int_{RG} d\bm{r}' \frac{\widetilde{n}^1 + \hat{n}(\bm{r}')}{|\bm{r} - \bm{r}'|}
+  \Bigr)
+  \label{eq:dE_dQRaL_g}
+  \\&+
+  e^2\int d\bm{r} g'_{\bm{R}\alpha L}(\bm{r})
+  \Bigl(
+    \int_M d\bm{r}' \frac{\hat{n}'(\bm{r}')}{|\bm{r} - \bm{r}'|}
+    -
+    \int_A d\bm{r}' \frac{\hat{n}'(\bm{r}')}{|\bm{r} - \bm{r}'|}
+  \Bigr)
+  \label{eq:dE_dQRaL_gp}
+  \\&=
+  e^2
+  \Bigl[
+    \int_R d\bm{r} d\bm{r}' \frac{g_{\bm{R}\alpha L}(\bm{r})\widetilde{n}(\bm{r}') + g'_{\bm{R}\alpha L}(\bm{r})\hat{n}'(\bm{r}')}{|\bm{r} - \bm{r}'|}
+    \nonumber
+    \\&
+    + \int_A d\bm{r} d\bm{r}' \frac{g_{\bm{R}\alpha L}(\bm{r})\hat{n}(\bm{r}') - g'_{\bm{R}\alpha L}(\bm{r})\hat{n}'(\bm{r}')}{|\bm{r} - \bm{r}'|}
+    \nonumber
+    \\&
+    - \int_{RG} d\bm{r} d\bm{r}' \frac{g_{\bm{R}\alpha L}(\bm{r})(\widetilde{n}^1 + \hat{n}(\bm{r}'))}{|\bm{r} - \bm{r}'|}
+  \Bigr]
+  \label{eq:dE_dQRaL}
+\end{align}
+Here, see the terms in (...) in Eq. (\ref{eq:dE_dQRaL_g}). The contribution from $\hat{n}$ formally (formally means if we treat the equation as purely mathematically formula without considering the method of numerical calculation) vanishes and $\widetilde{n} - \widetilde{n}^1$ vanishes in the core region. Because the potential made by $\hat{n}$ is identical to the potential made by $n^1+n^Z-\widetilde{n}^1$, the resultant formulas for 
+$\sum_{\bm{R}\alpha L} \dfrac{\partial E}{\partial Q_{\bm{R}\alpha L}} 
+   \dfrac{\partial Q_{\bm{R}\alpha L}}{\partial \widetilde{n}^1(\bm{r})}$
+and 
+$    \sum_{\bm{R}\alpha L} \dfrac{\partial E}{\partial Q_{\bm{R}\alpha L}} 
+\dfrac{\partial Q_{\bm{R}\alpha L}}{\partial n^1(\bm{r})}$
+can be re-written without using $\hat{n}$. This is quite natural because $\hat{n}$ is an auxiliary charge density for numerical calculation, which has some ambiguities that should not affect the final result.
+The terms in 
+(...) in Eq. (\ref{eq:dE_dQRaL_gp}) also formally vanishes because the calculation results should not be dependent on $\hat{n}'$.
+Note that each term in Eq. (\ref{eq:dE_dQRaL}) is defined as the derivatives of the formulas used for the numerical calculation of the corresponding terms in Eqs. (\ref{eq:tildeE_numerical_calculation})$\sim$(\ref{eq:tildeE1_numerical_calculation}).
+
+Now, we define
+\begin{align}
+  v^0_{\bm{R}\alpha}(\bm{r}) 
+  &= 
+  \sum_L 
+  \dfrac{\partial E}{\partial Q_{\bm{R}\alpha L}} 
+   \dfrac{\partial Q_{\bm{R}\alpha L}}{\partial {n}^1(\bm{r})}
+   = 
+   -\sum_L 
+   \dfrac{\partial E}{\partial Q_{\bm{R}\alpha L}} 
+    \dfrac{\partial Q_{\bm{R}\alpha L}}{\partial \widetilde{n}^1(\bm{r})}
+    \nonumber
+  \\&=
+  \sum_L 
+  |\bm{r}-\bm{R}_{\alpha}|^l Y^*_L(\widehat{\bm{r} - \bm{R}_{\alpha}})
+  \dfrac{\partial E}{\partial Q_{\bm{R}\alpha L}},
+\end{align}
+and
+\begin{align}
+  v^1_{\bm{R}\alpha}(\bm{r}) 
+  &= 
+  \frac{\partial E}{\partial n^1_{\bm{R}\alpha }(\bm{r})}
+  +
+  \sum_L 
+  \dfrac{\partial E}{\partial Q_{\bm{R}\alpha L}} 
+   \dfrac{\partial Q_{\bm{R}\alpha L}}{\partial {n}^1(\bm{r})}
+  \\&=
+  \int_{RG} d\bm{r}' \frac{n^1(\bm{r}') + n^Z(\bm{r}')}{|\bm{r} - \bm{r}'|}
+  + \mu_{xc}(n^1(\bm{r})) + v^0_{\bm{R}\alpha}(\bm{r}) ,
+\end{align}
+\begin{align}
+  \widetilde{v}^1_{\bm{R}\alpha}(\bm{r}) 
+  &= 
+  -\Bigl(
+  \frac{\partial E}{\partial \widetilde{n}^1_{\bm{R}\alpha }(\bm{r})}
+  +
+  \sum_L 
+  \dfrac{\partial E}{\partial Q_{\bm{R}\alpha L}} 
+   \dfrac{\partial Q_{\bm{R}\alpha L}}{\partial \widetilde{n}^1(\bm{r})}
+   \Bigr)
+  \\&=
+  \int_{RG} d\bm{r}' \frac{\widetilde{n}^1(\bm{r}') + \hat{n}(\bm{r}')}{|\bm{r} - \bm{r}'|}
+  + \mu_{xc}(\widetilde{n}^1(\bm{r})) + v^0_{\bm{R}\alpha}(\bm{r}).
+\end{align}
+In addition, we define
+\begin{align}
+  &v^1(\bm{r}) = \sum_{\bm{R}\alpha } v^1_{\bm{R}\alpha}(\bm{r})
+  \\&
+  \widetilde{v}^1(\bm{r}) = \sum_{\bm{R}\alpha } \widetilde{v}^1_{\bm{R}\alpha}(\bm{r}).
+\end{align}
+
+Then, the Hamilton operator $\widetilde{H}$, which satisfies
+\begin{align}
+  \frac{\partial E}{\partial \bra{\widetilde{\psi}_{n\bm{k}}}} = f_{n\bm{k}} \widetilde{H}\ket{\widetilde{\psi}_{n\bm{k}}},
+\end{align}
+can be calculated as
+\begin{align}
+  \widetilde{H}
+  &=
+  \frac{-\hbar^2 \nabla^2}{2m} + \widetilde{v}(\bm{r})
+  + 
+  \sum_{\bm{R}\alpha nL n'L'}
+  \ket{\widetilde{p}_{\bm{R}\alpha nL}}
+  \Bigl(
+    \braket{\phi_{\bm{R}\alpha nL} | \frac{-\hbar^2 \nabla^2}{2m} + v^1| \phi_{\bm{R}\alpha n'L'}} 
+    \nonumber
+    \\&- 
+    \braket{\widetilde{\phi}_{\bm{R}\alpha nL} | \frac{-\hbar^2 \nabla^2}{2m} + \widetilde{v}^1 | \widetilde{\phi}_{\bm{R}\alpha n'L'}}
+  \Bigr)
+  \bra{\widetilde{p}_{\bm{R}\alpha n'L'}}.
+\end{align}
+The total potential is given by $v = \widetilde{v} + v^1 - \widetilde{v}^1$.
 \bibliographystyle{unsrt}
 \bibliography{reference}
 \end{document}
