@@ -13,11 +13,13 @@ jobs:
       - name: Compile LaTeX notes on DFT
         uses: xu-cheng/latex-action@v3
         with:
-          root_file: DFT/DFT.tex
+          pre_compile: "cd DFT/"
+          root_file: DFT.tex
+          post_compile: "cd ../"
       - name: Upload PDF file DFT.pdf
         uses: actions/upload-artifact@v4
         with:
           name: Notes on DFT
-          path: DFT.pdf
+          path: DFT/DFT.pdf
 
 
