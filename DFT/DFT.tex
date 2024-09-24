@@ -11,7 +11,7 @@
 \usepackage{braket}
 \usepackage{float}
 
-
+\usepackage{comment}
 
 \title{Notes on density functional theory}
 \author{Ryota Masuki}
@@ -21,6 +21,108 @@
 \maketitle
 
 \section{Pseudopotential methods}
+\subsection{Norm-conserving Pseudopotential}
+The idea of the norm-conserving pseudopotential was conceived by Hamman, et al~\cite{PhysRevLett.43.1494}.
+The important point is that the preservation of the derivative of the phase shift follows from the norm-conserving condition,
+which theoretically supports the transferability of this pseudopotential.
+
+We first explain the Norm-conserving pseudopotential in a one-body problem.
+How to combine the idea with DFT is explained later.
+
+The norm-conserving pseudopotential is the angular-momentum-dependent pseudopotential with the form
+\begin{align}
+  V^{\text{ps}} = \sum_{L:(lm)} \ket{lm} V^{\text{ps}}_l(r) \bra{lm}
+\end{align}
+that satisfy the following condition.
+\begin{enumerate}
+  \item The pseudo (radial) wavefunction $R^{\text{ps}}_l(r)$ satisfy the Schroedinger equation
+  \begin{align}
+    \Bigl[
+      - \frac{\hbar^2}{2m} \frac{d^2}{dr^2} + \frac{l(l+1)\hbar^2}{2mr^2} + V^{\text{ps}}_l(r)
+    \Bigr] rR^{\text{ps}}_l(r) = E_l r R^{\text{ps}}_l(r).
+  \end{align}
+  Note that the all-electron radial wavefunction $R^{\text{ae}}_l(r)$ satisfies
+  \begin{align}
+    \Bigl[
+      - \frac{\hbar^2}{2m} \frac{d^2}{dr^2} + \frac{l(l+1)\hbar^2}{2mr^2} + V(r)
+    \Bigr] rR^{\text{ps}}_l(r) = E_l r R^{\text{ps}}_l(r),
+  \end{align}
+  where $V(r)$ is the original one-body potential which is independent of angular momentum $lm$.
+  \item The pseudowavefunctions $R^{\text{ps}}_l(r)$ don't have zero-points inside the core region $r<r_c$ and satisfy the norm-conserving condition
+  \begin{align}
+    \int_0^{r_c} dr r^2 (R^{\text{ps}}_l(r))^2 = \int_0^{r_c} dr r^2 R_l^2(r)
+  \end{align}
+  We can prove that the derivative of the phase shift with respect to the energy at $E = E_l$ is preserved if the norm-conserving condition is satisfied~\cite{PhysRevLett.43.1494, Fujiwara_Kotaidenshikouzou}, which I abbreviate the proof here.
+  \item The pseudowavefunctions exactly match the original wavefunction outside the core region.
+  \begin{align}
+   R^{\text{ps}}_l(r)= R_l(r) \text{\ }(r > r_c)
+  \end{align}
+\end{enumerate}
+
+\subsubsection{Generation of norm-conserving pseudopotentials}
+The generation of norm-conserving pseudopotentials are done as follows.
+\begin{enumerate}
+  \item Calculate the original wavefunction $R_l(r)$.\\
+  We start with solving the exact one-body problem for atoms. In case of DFT, we solve the all-electron DFT for atoms.
+  \item Determine the pseudowavefunction $R^{\text{ps}}_l(r)$ that safisfy the conditions discussed above.\\
+  In principle, the choice of $R^{\text{ps}}_l(r)$ is arbitrary, as long as it satisfies the norm-conserving condition, etc.
+  However, it is better to choose ones that are more smooth and transferable (I'm not familiar with how to make pseudopotentials with high transferability, though).
+  \item Calculate pseudopotential
+  \begin{align}
+    V^{\text{ps}}_l(r) = E_l - \frac{l(l+1)\hbar^2}{2mr^2} + \frac{1}{rR^{\text{ps}}_l(r)}  \frac{\hbar^2}{2m} \frac{d^2}{dr^2} [rR^{\text{ps}}_l(r)]
+  \end{align}
+\end{enumerate}
+\subsubsection{Combination of norm-conserving potentials with DFT}
+The Kohn-Sham equation solved in all-electron DFT for atoms is 
+\begin{align}
+  \Bigl[
+    - \frac{\hbar^2}{2m} \frac{d^2}{dr^2} + \frac{l(l+1)\hbar^2}{2mr^2} +  v_{\text{ext}}(r) + v_H(r;n) + v_{xc}(r;n)
+  \Bigr] rR_l(r) = E_l r R_l(r).
+\end{align}
+
+
+On the other hand, the Kohn-Sham equation will look like
+\begin{align}
+  \Bigl[
+    - \frac{\hbar^2}{2m} \frac{d^2}{dr^2} + \frac{l(l+1)\hbar^2}{2mr^2} +  v^{\text{ps:ion}}_l(r) + v_H(r;n^{\text{ps}}) + v_{xc}(r;n^{\text{ps}})
+  \Bigr] rR^{\text{ps}}_l(r) = E_l r R^{\text{ps}}_l(r).
+\end{align}
+where
+\begin{align}
+  n(\bm{r}) = \sum_{i: \text{occupied valence and core}} |\psi_i (\bm{r}) |^2
+\end{align}
+is the all-electron density and 
+\begin{align}
+  n^{\text{ps}}(\bm{r}) = \sum_{v: \text{occupied valence}} |\psi_v^{\text{ps}} (\bm{r}) |^2
+\end{align}
+is the density calculated from the pseudo density.
+Thus, the ionic pseudopotential is calculated as 
+\begin{align}
+  V^{\text{ps:ion}} = \sum_{lm} \ket{lm} v^{\text{ps:ion}}_l(r)  \bra{lm},
+\end{align}
+\footnote{In textbooks, we see the form
+\begin{align}
+  V^{\text{ps:ion}} = V_{\text{local}}(r) + \sum_{lm} \ket{lm} v^{\text{ps:ion}}_l(r)  \bra{lm},
+\end{align}
+where $V_{\text{local}}(r) $ is the $l$-independent term.
+Here, the definition of $V_{\text{local}}(r)$ is arbitrary because it can be included in $v^{\text{ps:ion}}_l$.
+I suppose that  $V_{\text{local}}(r)$ is chosen by numerical reasons considering that we can use only finite numbers of $lm$'s in numerical calculations (Need confirmation).
+}
+where 
+\begin{align}
+  v^{\text{ps:ion}}_{l}(r) = V^{\text{ps}}_l(r) - v_H(r;n^{\text{ps}}) - v_{xc}(r;n^{\text{ps}}).
+\end{align}
+
+\subsubsection{Approximations in norm-conserving pseudopotentials}
+Norm-conserving pseudopotentials are exact
+\begin{itemize} 
+  \item for the wavefunction outside the core region and the total charge inside the core region
+  \item for the same quantum number $n$ as the eigen state $R_{nl}$ used for the generation of the pseudopotential (Note that we have abbreviated the primary quantum number $n$ so far!)
+  \item when the charge density and the potential exactly matches the original atomic problem.
+\end{itemize}
+They are not exact when any of the above conditions is not satisfied. The third condition is satisfied only when we solve the same atomic problem as the generation of the pseudopotential.
+
+
 \subsection{Projector Augmented Wave (PAW) method}
 \subsubsection{Theory}
 The all electron wavefunction $\ket{\Psi}$ is written by 
