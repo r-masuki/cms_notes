@@ -1,0 +1,23 @@
+name: Build LaTeX documents
+on: [workflow_dispatch]
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v4
+      - name: Edit tex files for Github actions environments
+        run:  |
+          sed 's|\[dvipdfmx\]||g' DFT/DFT.tex > DFT/tmp.tex && \
+          mv DFT/tmp.tex DFT/DFT.tex
+      - name: Compile LaTeX notes on DFT
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: DFT/DFT.tex
+      - name: Upload PDF file DFT.pdf
+        uses: actions/upload-artifact@v4
+        with:
+          name: Notes on DFT
+          path: DFT.pdf
+
+
