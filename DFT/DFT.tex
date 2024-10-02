@@ -122,6 +122,100 @@ Norm-conserving pseudopotentials are exact
 \end{itemize}
 They are not exact when any of the above conditions is not satisfied. The third condition is satisfied only when we solve the same atomic problem as the generation of the pseudopotential.
 
+\subsection{Ultrafast pseudopotential}
+The ultrasoft pseudopotential was conceived by D. Vanderbilt~\cite{PhysRevB.41.7892}.
+The most prominent feature of the ultrasoft pseudopotentials is that the transferability can be systematically improved by increasing the number of reference energies.
+
+\subsubsection{The case of one-state}
+We consider a one-body spherically symmetric problem.
+\begin{align}
+  \Bigl(
+    \frac{-\hbar^2}{2m} \frac{d^2}{d2r^2}
+    + V(r)
+    + \frac{l(l+1)\hbar^2}{2mr^2} 
+  \Bigr)r R_{nl}(r)
+  = 
+  \epsilon_{nl} r R_{nl}(r),
+\end{align}
+where the radial wavefunction $R_{nl}(r)$ is defined as 
+\begin{align}
+  \psi_{nlm}(\bm{r}) = R_{nl}(r) Y_{lm}(\hat{\bm{r}}),
+\end{align}
+using the full wavefunction $\psi_{nlm}(\bm{r})$.
+Here, we consider a pseudo wavefunction 
+\begin{align}
+  \phi_{nlm}(\bm{r}) = R^{\text{ps}}_{nl}(r) Y_{lm}(\hat{\bm{r}}),
+\end{align}
+which 
+\begin{itemize}
+  \item smoothly connects to $\psi_{nl}$ at $r = r_c$.
+  \item satisfies the norm-conserving condition
+  \begin{align}
+    \int_0^{R} r^2 R_{nl}^2 (r) = \int_0^{R} r^2 ( R^{\text{ps}}_{nl} (r) )^2\text{\ \ }(R > r_c)
+  \end{align}
+\end{itemize}
+Here, we define 
+\begin{align}
+  \ket{\chi_{nlm}} 
+  &= \Bigl(\epsilon_{nl} + \frac{\hbar^2\nabla^2}{2m} - V \Bigr)\ket{\phi_{nlm}}
+  \nonumber
+  \\&=
+  Y_{lm}(\hat{\bm{r}})
+  \frac{1}{r}
+  \times
+  \Bigl(\epsilon_{nl} + \frac{\hbar^2}{2m} \frac{d^2}{dr^2} - \frac{l(l+1)\hbar^2}{2mr^2} - V \Bigr) r R^{\text{ps}}_{nl}(r)
+  \nonumber
+  \\&= 
+  R^{\chi_{nl}}(r) Y_{lm}(\hat{\bm{r}})
+\end{align}
+\begin{align}
+  V_{NL} 
+  &= \sum_{lm} \frac{\ket{\chi_{nlm}}_R\bra{\chi_{nlm}}_R}{\braket{\chi_{nl} | \phi_{nl}}_R}
+  \nonumber
+  \\&=
+  \sum_{l} \hat{P_l} \frac{\ket{\chi_{nl}}_R\bra{\chi_{nl}}_R}{\braket{\chi_{nl} | \phi_{nl}}_R} \hat{P_l},
+\end{align}
+Note that 
+\begin{align}
+  \braket{\chi_{nl} | \phi_{nl}}_R
+  &= \braket{\chi_{nlm} | \phi_{nlm}}_R
+  \nonumber
+  \\&=
+  \int_0^R dr r 
+  (R^{\text{ps}}_{nl}(r))^* 
+  \Bigl(
+    \epsilon_{nl} 
+    + \frac{\hbar^2}{2m}\frac{d^2}{dr^2} 
+    - \frac{l(l+1)\hbar^2}{2mr^2} - V(r) \
+  \Bigr) r R^{\text{ps}}_{nl}(r)
+  \nonumber
+  \\&=
+  \int_0^R dr r^2 (R^{\chi_{nl}}(r) )^* R^{\text{ps}}_{nl}(r)
+\end{align}
+is independent of the magnetic quantum number $m$.
+For arbitrary state $\widetilde{\psi}_{lm}(\bm{r}) = \widetilde{R}(r) Y_{lm}(\hat{\bm{r}})$ with angular momentum $lm$, $\ket{\chi_{nlm}}_R\bra{\chi_{nlm}}_R$ operates as
+\begin{align}
+  \ket{\chi_{nlm}}_R\bra{\chi_{nlm}}_R \widetilde{\psi}_{lm}(\bm{r}) 
+  = 
+  \chi_{lm}({\bm{r}}) \times \int_0^R dr r^2 (R^{\text{ps}}_{nl}(r))^* \widetilde{R}(r).
+\end{align}
+\begin{comment}
+where
+\begin{align}
+  r R^{\chi}(\bm{r}) = 
+  \Bigl(
+    \epsilon_{nl} 
+    + \frac{\hbar^2}{2m}\frac{d^2}{dr^2} 
+    - \frac{l(l+1)\hbar^2}{2mr^2} - V(r) \
+  \Bigr) r R^{\text{ps}}_{nl}(r)
+\end{align}
+\end{comment}
+$V_{NL}$ satisfies
+\begin{align}
+ \Bigl( - \frac{\hbar^2\nabla^2}{2m} + V(\bm{r}) + V_{NL}\Bigr) \phi_{nlm}(\bm{r}) = \epsilon_{nl} \phi_{nlm}(\bm{r}).
+\end{align}
+
+
 
 \subsection{Projector Augmented Wave (PAW) method}
 \subsubsection{Theory}
