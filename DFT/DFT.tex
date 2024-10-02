@@ -80,12 +80,10 @@ The Kohn-Sham equation solved in all-electron DFT for atoms is
     - \frac{\hbar^2}{2m} \frac{d^2}{dr^2} + \frac{l(l+1)\hbar^2}{2mr^2} +  v_{\text{ext}}(r) + v_H(r;n) + v_{xc}(r;n)
   \Bigr] rR_l(r) = E_l r R_l(r).
 \end{align}
-
-
-On the other hand, the Kohn-Sham equation will look like
+On the other hand, the Kohn-Sham equation with the pseudopotential will look like
 \begin{align}
   \Bigl[
-    - \frac{\hbar^2}{2m} \frac{d^2}{dr^2} + \frac{l(l+1)\hbar^2}{2mr^2} +  v^{\text{ps:ion}}_l(r) + v_H(r;n^{\text{ps}}) + v_{xc}(r;n^{\text{ps}})
+    - \frac{\hbar^2}{2m} \frac{d^2}{dr^2} + \frac{l(l+1)\hbar^2}{2mr^2} +  v^{\text{ps:ion}}_l(r) + v_H(r;n^{\text{ps}}) + v_{xc}(r;n^{\text{ps}} + n_c)
   \Bigr] rR^{\text{ps}}_l(r) = E_l r R^{\text{ps}}_l(r).
 \end{align}
 where
@@ -97,6 +95,7 @@ is the all-electron density and
   n^{\text{ps}}(\bm{r}) = \sum_{v: \text{occupied valence}} |\psi_v^{\text{ps}} (\bm{r}) |^2
 \end{align}
 is the density calculated from the pseudo density.
+$n_c$ is the density of the core electron density, which is fixed in the frozen core approximation (?).
 Thus, the ionic pseudopotential is calculated as 
 \begin{align}
   V^{\text{ps:ion}} = \sum_{lm} \ket{lm} v^{\text{ps:ion}}_l(r)  \bra{lm},
@@ -111,7 +110,7 @@ I suppose that  $V_{\text{local}}(r)$ is chosen by numerical reasons considering
 }
 where 
 \begin{align}
-  v^{\text{ps:ion}}_{l}(r) = V^{\text{ps}}_l(r) - v_H(r;n^{\text{ps}}) - v_{xc}(r;n^{\text{ps}}).
+  v^{\text{ps:ion}}_{l}(r) = V^{\text{ps}}_l(r) - v_H(r;n^{\text{ps}}) - v_{xc}(r;n).
 \end{align}
 
 \subsubsection{Approximations in norm-conserving pseudopotentials}
