@@ -215,6 +215,126 @@ $V_{NL}$ satisfies
  \Bigl( - \frac{\hbar^2\nabla^2}{2m} + V(\bm{r}) + V_{NL}\Bigr) \phi_{nlm}(\bm{r}) = \epsilon_{nl} \phi_{nlm}(\bm{r}).
 \end{align}
 
+\subsubsection{Extension to multiple states}
+We next consider multiple $n$ for each $l$.
+We again consider a one-body spherically symmetric problem.
+\begin{align}
+  \Bigl(
+    \frac{-\hbar^2}{2m} \frac{d^2}{d2r^2}
+    + V(r)
+    + \frac{l(l+1)\hbar^2}{2mr^2} 
+  \Bigr)r R_{nl}(r)
+  = 
+  \epsilon_{nl} r R_{nl}(r),
+\end{align}
+where the radial wavefunction $R_{nl}(r)$ is defined as 
+\begin{align}
+  \psi_{nlm}(\bm{r}) = R_{nl}(r) Y_{lm}(\hat{\bm{r}}),
+\end{align}
+using the full wavefunction $\psi_{nlm}(\bm{r})$.
+Here, we consider a pseudo wavefunction 
+\begin{align}
+  \phi_{nlm}(\bm{r}) = R^{\text{ps}}_{nl}(r) Y_{lm}(\hat{\bm{r}}),
+\end{align}
+which 
+\begin{itemize}
+  \item smoothly connects to $\psi_{nl}$ at $r = r_c$.
+  \item does NOT NECESSARILY satisfy the norm-conserving condition
+\end{itemize}
+Following the procedure in the one-state case, we define
+\begin{align}
+  \ket{\chi_{nlm}} 
+  &= \Bigl(\epsilon_{nl} + \frac{\hbar^2\nabla^2}{2m} - V \Bigr)\ket{\phi_{nlm}}
+  \nonumber
+  \\&=
+  Y_{lm}(\hat{\bm{r}})
+  \frac{1}{r}
+  \times
+  \Bigl(\epsilon_{nl} + \frac{\hbar^2}{2m} \frac{d^2}{dr^2} - \frac{l(l+1)\hbar^2}{2mr^2} - V \Bigr) r R^{\text{ps}}_{nl}(r)
+  \nonumber
+  \\&= 
+  R^{\chi_{nl}}(r) Y_{lm}(\hat{\bm{r}}).
+\end{align}
+Here, we define 
+\begin{align}
+  Q_{lij} 
+  &= 
+  \braket{\psi_{ilm} | \psi_{jlm}}_R - \braket{\phi_{ilm} | \phi_{jlm}}_R 
+  \nonumber
+  \\&=
+  \int_0^R dr r^2 [ R_{il}^*(r) R_{jl}(r) - (R^{\text{ps}}_{il}(r))^* R^{\text{ps}}_{jl}(r) ],
+\end{align}
+\begin{align}
+  B_{lij} 
+  &= 
+   \braket{\phi_{ilm} | \epsilon_{jl} + \frac{\hbar^2\nabla^2}{2m} - V|\phi_{jlm}}_R 
+  \nonumber
+  \\&=
+  \braket{\phi_{ilm} | \chi_{jlm}}_R 
+  \nonumber
+  \\&=
+  \int_0^R dr 
+  r(R^{\text{ps}}_{il}(r))^* 
+  \Bigl(
+    \epsilon_{nl} + \frac{\hbar^2}{2m} \frac{d^2}{dr^2} - \frac{l(l+1)\hbar^2}{2mr^2} - V(r)
+  \Bigr)
+  r R^{\text{ps}}_{jl}(r).
+\end{align}
+Both $Q_{lij}$ and $B_{lij}$ are independent of the magnetic quantum number $m$, although $m$ appears when we define them with braket formalism.
+$Q_{lij}$ is the correction of the charge in the core region that we need to add to the pseudo density in order to obtain the correct total charge.
+$B_{lij}$ satisfies $B_{lij} - B_{lji}^* = (\epsilon_{il} - \epsilon_{jl}) Q_{lij}$, which can be shown as
+\begin{align}
+  B_{lij} - B_{lji}^* 
+  &=
+  (\epsilon_{jl} - \epsilon_{il}) \int_0^R dr r^2 (R^{\text{ps}}_{il}(r))^* R^{\text{ps}}_{jl}(r)
+  + \frac{\hbar^2}{2m} \int_0^R r (R^{\text{ps}}_{il}(r))^* \frac{d^2}{dr^2} rR^{\text{ps}}_{jl}(r) - rR^{\text{ps}}_{jl}(r) \frac{d^2}{dr^2} (rR^{\text{ps}}_{il}(r))^* 
+  \nonumber
+  \\&=
+  (\epsilon_{jl} - \epsilon_{il}) \int_0^R dr r^2 (R^{\text{ps}}_{il}(r))^* R^{\text{ps}}_{jl}(r)
+  + \frac{\hbar^2}{2m}
+  \Bigl[
+    (R^{\text{ps}}_{il}(r))^* \frac{d}{dr} rR^{\text{ps}}_{jl}(r) - rR^{\text{ps}}_{jl}(r) \frac{d}{dr} (rR^{\text{ps}}_{il}(r))^* 
+  \Bigr]_0^R
+  \nonumber
+  \\&=
+  (\epsilon_{jl} - \epsilon_{il}) \int_0^R dr r^2 (R^{\text{ps}}_{il}(r))^* R^{\text{ps}}_{jl}(r)
+  + \frac{\hbar^2}{2m}
+  \Bigl[
+    (R_{il}(r))^* \frac{d}{dr} rR_{jl}(r) - rR_{jl}(r) \frac{d}{dr} (rR_{il}(r))^* 
+  \Bigr]_0^R
+  \nonumber
+  \\&=
+  (\epsilon_{jl} - \epsilon_{il}) \int_0^R dr r^2 (R^{\text{ps}}_{il}(r))^* R^{\text{ps}}_{jl}(r)
+  + \frac{\hbar^2}{2m} \int_0^R r (R_{il}(r))^* \frac{d^2}{dr^2} rR_{jl}(r) - rR_{jl}(r) \frac{d^2}{dr^2} (rR_{il}(r))^* 
+  \nonumber
+  \\&=
+  (\epsilon_{jl} - \epsilon_{il}) \int_0^R dr r^2 (R^{\text{ps}}_{il}(r))^* R^{\text{ps}}_{jl}(r) - (\epsilon_{jl} - \epsilon_{il}) \int_0^R dr r^2 (R_{il}(r))^* R_{jl}(r)
+  \nonumber 
+  \\&= (\epsilon_{il} - \epsilon_{jl}) Q_{lij}
+\end{align}
+We used that $R_{il} = R^{\text{ps}}_{jl}$ at $r > r_c$ (from the second to third line) and that $R_{il}Y_{lm}$ is the eigenstate of $ - \frac{\hbar^2\nabla^2}{2m} + V(\bm{r}) $ (from the fourth to the fifth line). Note that a similar transformation as that from the fourth to the fifth line cannot be used for $R^{\text{ps}}_{il}$ because it is not an eigenstate of the considering operator.
+We also define
+\begin{align}
+  \ket{\beta_{ilm}} = \sum_j (B^{-1}_l)_{ji} \bra{\chi_{jlm}}.
+\end{align}
+
+Here, IF $Q_{lij} = 0$ (norm-conserving condition is SATISFIED), we can construct an Hermitian operator
+\begin{align}
+  V_{NL} 
+  &= 
+  \sum_{lm,ij} B_{lij} \ket{\beta_{ilm}} \bra{\beta_{jlm}}
+  \nonumber
+  \\&=
+  \sum_{lm,ij} (B_{l}^{-1})_{ij}^* \ket{\chi_{ilm}} \bra{\chi_{jlm}},
+\end{align}
+which satisfies
+\begin{align}
+  \Bigl(
+    - \frac{\hbar^2\nabla^2}{2m} + V(\bm{r}) + V_{NL}
+  \Bigr)
+  \ket{\psi_{nlm}} = \epsilon_{nl}\ket{\psi_{nlm}}
+\end{align}
+as in the one-state case.
 
 
 \subsection{Projector Augmented Wave (PAW) method}
