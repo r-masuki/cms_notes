@@ -130,7 +130,7 @@ The most prominent feature of the ultrasoft pseudopotentials is that the transfe
 We consider a one-body spherically symmetric problem.
 \begin{align}
   \Bigl(
-    \frac{-\hbar^2}{2m} \frac{d^2}{d2r^2}
+    \frac{-\hbar^2}{2m} \frac{d^2}{dr^2}
     + V(r)
     + \frac{l(l+1)\hbar^2}{2mr^2} 
   \Bigr)r R_{nl}(r)
@@ -166,7 +166,7 @@ Here, we define
   \Bigl(\epsilon_{nl} + \frac{\hbar^2}{2m} \frac{d^2}{dr^2} - \frac{l(l+1)\hbar^2}{2mr^2} - V \Bigr) r R^{\text{ps}}_{nl}(r)
   \nonumber
   \\&= 
-  R^{\chi_{nl}}(r) Y_{lm}(\hat{\bm{r}})
+  R^{\chi}_{nl}(r) Y_{lm}(\hat{\bm{r}})
 \end{align}
 \begin{align}
   V_{NL} 
@@ -190,7 +190,7 @@ Note that
   \Bigr) r R^{\text{ps}}_{nl}(r)
   \nonumber
   \\&=
-  \int_0^R dr r^2 (R^{\chi_{nl}}(r) )^* R^{\text{ps}}_{nl}(r)
+  \int_0^R dr r^2 (R^{\chi}_{nl}(r) )^* R^{\text{ps}}_{nl}(r)
 \end{align}
 is independent of the magnetic quantum number $m$.
 For arbitrary state $\widetilde{\psi}_{lm}(\bm{r}) = \widetilde{R}(r) Y_{lm}(\hat{\bm{r}})$ with angular momentum $lm$, $\ket{\chi_{nlm}}_R\bra{\chi_{nlm}}_R$ operates as
@@ -253,7 +253,7 @@ Following the procedure in the one-state case, we define
   \Bigl(\epsilon_{nl} + \frac{\hbar^2}{2m} \frac{d^2}{dr^2} - \frac{l(l+1)\hbar^2}{2mr^2} - V \Bigr) r R^{\text{ps}}_{nl}(r)
   \nonumber
   \\&= 
-  R^{\chi_{nl}}(r) Y_{lm}(\hat{\bm{r}}).
+  R^{\chi}_{nl}(r) Y_{lm}(\hat{\bm{r}}).
 \end{align}
 Here, we define 
 \begin{align}
@@ -276,7 +276,7 @@ Here, we define
   \int_0^R dr 
   r(R^{\text{ps}}_{il}(r))^* 
   \Bigl(
-    \epsilon_{nl} + \frac{\hbar^2}{2m} \frac{d^2}{dr^2} - \frac{l(l+1)\hbar^2}{2mr^2} - V(r)
+    \epsilon_{jl} + \frac{\hbar^2}{2m} \frac{d^2}{dr^2} - \frac{l(l+1)\hbar^2}{2mr^2} - V(r)
   \Bigr)
   r R^{\text{ps}}_{jl}(r).
 \end{align}
@@ -315,9 +315,12 @@ $B_{lij}$ satisfies $B_{lij} - B_{lji}^* = (\epsilon_{il} - \epsilon_{jl}) Q_{li
 We used that $R_{il} = R^{\text{ps}}_{jl}$ at $r > r_c$ (from the second to third line) and that $R_{il}Y_{lm}$ is the eigenstate of $ - \frac{\hbar^2\nabla^2}{2m} + V(\bm{r}) $ (from the fourth to the fifth line). Note that a similar transformation as that from the fourth to the fifth line cannot be used for $R^{\text{ps}}_{il}$ because it is not an eigenstate of the considering operator.
 We also define
 \begin{align}
-  \ket{\beta_{ilm}} = \sum_j (B^{-1}_l)_{ji} \bra{\chi_{jlm}}.
+  \ket{\beta_{ilm}} = \sum_j (B^{-1}_l)_{ji} \ket{\chi_{jlm}},
 \end{align}
-
+which satisfy
+\begin{align}
+  \braket{\phi_{ilm} | \beta_{jl'm'}} = \delta_{ll'} \delta_{mm'} \delta_{ij}
+\end{align}
 Here, IF $Q_{lij} = 0$ (norm-conserving condition is SATISFIED), we can construct an Hermitian operator
 \begin{align}
   V_{NL} 
@@ -335,6 +338,20 @@ which satisfies
   \ket{\psi_{nlm}} = \epsilon_{nl}\ket{\psi_{nlm}}
 \end{align}
 as in the one-state case.
+
+Let's now relax the norm-conserving condition.
+We define 
+\begin{align}
+  S = 1 + \sum_{lijm} Q_{lij} \ket{\beta_{ilm}} \bra{\beta_{jlm}}
+\end{align}
+Then, we get
+\begin{align}
+  \braket{\phi_{ilm} | S | \phi_{jl'm'}}_R = \braket{\psi_{ilm} | \psi_{jl'm'}}
+\end{align}
+Now, we try to minimize the energy functional 
+\begin{align}
+a
+\end{align}
 
 
 \subsection{Projector Augmented Wave (PAW) method}
