@@ -14,6 +14,24 @@
 
 \usepackage{comment}
 
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage[dvipdfmx]{hyperref}
+\usepackage{pxjahyper}
+\usepackage{url}
+
+\theoremstyle{definition}
+\newtheorem{dfn}{Definition}[section]
+\newtheorem{prop}[dfn]{Proposition}
+\newtheorem{lem}[dfn]{Lemma}
+\newtheorem{thm}[dfn]{Theorem}
+\newtheorem{cor}[dfn]{Corollary}
+\newtheorem{rem}[dfn]{Remark}
+%\newtheorem*{rem*}[dfn]{Remark}
+\newtheorem{fact}[dfn]{Fact}
+
+
 \title{Notes on symmetry and group theory}
 \author{Ryota Masuki}
 \date{\today}
@@ -115,7 +133,11 @@ We assume that $\bar{\Delta}(u) = \Delta^*(a_0^{-1} u a_0) = U^{-1} \Delta(u) U$
 \begin{align}
   \psi'_k = \sum_j \varphi'_j U_{jk}.
 \end{align}
-Then, $\psi$ and $\varphi$ satisfies
+In this section, we proceed in a mathematical fashion because the discussion is somewhat complicated.
+We first clarify our assumptions.
+\begin{dfn}[Starting point: $\Delta$ and $U$]\label{dfn:starting_point}~\\
+  We assume that $\Delta$ and $\bar{\Delta}$ defined in the last section are equivalent by the transformation $\bar{\Delta}(u) = \Delta^*(a_0^{-1} u a_0) = U^{-1} \Delta(u) U$.
+  Then, by taking an appropriate basis  $\psi_k \in H$ and $\varphi'_k \in H'$,
 \begin{align}
   u \psi_k &= \psi_j \Delta_{jk} (u)
   \label{eq:upsi}
@@ -128,43 +150,77 @@ Then, $\psi$ and $\varphi$ satisfies
 \end{align}
 Eqs. (\ref{eq:upsi}) and (\ref{eq:uvarphiprime}) defines the mappings $u: H \to H$, $u: H' \to H'$ respectively.
 Eq. (\ref{eq:a0psi}) defines the mapping $a_0: H\to H'$.
+\end{dfn}
 
-Here, we investigate the condition that the above Eqs. (\ref{eq:upsi})to (\ref{eq:a0psi}) defines a consistent and a unique corepresentation.
-\begin{enumerate}
-  \item Corepresentation of $a_0$: $a_0 \varphi'_k=??$\\
-  We first investigate how $a_0$ operates to the elements in $H'$. We start from 
+\begin{prop}[$a_0 : H' \to H$]\label{prop:a_0Hprime_H}~\\
+  If we define $a_0 : H' \to H$ by 
   \begin{align}
-    a_0(a_0 \psi_k) = a_0^2 \psi. 
-    \label{eq:a02_psi}
-  \end{align}
-  Calculating each side separately, we get\\
-  \begin{align}
-    \text{(LHS)} = a_0 (\varphi'_j U_{jk}) = (a_0 \varphi') U^*
-  \end{align}
-  \begin{align}
-    \text{(RHS)} = a_0 (\varphi'_j U_{jk}) = \psi \Delta(a_0^2)
-  \end{align}
-  Thus,
-  \begin{align}
-    a_0 \varphi'_k = \psi_j (\Delta (a_0^2) (U^{-1})^*)_{jk} = \psi_j (\Delta (a_0^2) U^{T})_{jk}
+    a_0 \varphi'_k = \psi_j (\Delta (a_0^2) (U^{-1})^*)_{jk} = \psi_j (\Delta (a_0^2) U^{T})_{jk},
     \label{eq:a0varphi_prime}
   \end{align}
-  In other words, Eq. (\ref{eq:a0varphi_prime}) specifies the mapping $a_0: H' \to H$ that satisfy Eq. (\ref{eq:a02_psi}).
-  \item consistency of the transformation in $H$ and $H'$\\
-  We start from the equation 
+  the condition
   \begin{align}
-    (a_0^{-1} u a_0 ) \psi = a_0^{-1}(u (a_0 \psi)).
-    \label{eq:consistency_transf_HHprime}
+    a_0(a_0 \psi_k) = a_0^2 \psi_k. 
+    \label{eq:a02_psi}
+  \end{align}
+  is satisfied.
+\end{prop}
+
+\begin{proof}
+  We calculate the LHS and RHS of Eq. (\ref{eq:a02_psi}) separately.
+  \begin{align}
+    \text{(LHS)} = a_0 (\varphi'_j U_{jk}) = (a_0 \varphi') U^*,
   \end{align}
   \begin{align}
-    \text{(LHS)} = \psi_j \Delta_{jk}(a_0^{-1} u a_0).
+    \text{(RHS)} = a_0 (\varphi'_j U_{jk}) = \psi \Delta(a_0^2).
   \end{align}
-  To calculate the RHS, we use 
+  Comparing them, we get the proposition.
+\end{proof}
+
+Next, we investigate the inverse of $a_0$. 
+
+\begin{prop}[$a_0^{-1} : H' \to H$]\label{prop:a01_Hprime_H}~\\
+  If $a_0^{-1} : H' \to H$ is defined by
   \begin{align}
     a_0^{-1} \varphi'_k = \psi_j (U^{-1})^*_{jk} = \psi_j (U^{T})_{jk}, 
     \label{eq:inversea0_varphi}
   \end{align}
-  which is obtained from $a_0^{-1} (a_0 \psi_k) = \psi_k$.
+  $a_0^{-1} (a_0 \psi_k) = \psi_k$ is satisfied.
+\end{prop}
+\begin{proof}
+  Easy calculation.
+\end{proof}
+
+\begin{prop}[$a_0^{-1} : H \to H'$]\label{prop:a01_H_Hprime}~\\
+  If $a_0^{-1} : H \to H$' is defined by
+  \begin{align}
+    a_0^{-1} \psi_k = \varphi'_j (U \Delta(a_0^{-2})^*)_{jk} = \varphi'_j (U \Delta^T(a_0^{2}))_{jk}, 
+    \label{eq:inversea0_varphi_HHprime}
+  \end{align}
+  $a_0^{-1} (a_0 \varphi'_k) = \varphi'_k$ is satisfied.
+\end{prop}
+\begin{proof}
+  Easy calculation.
+\end{proof}
+
+\begin{thm}[Consistency of $u: H\to H$ and $u: H'\to H'$]\label{thm:Consistency_HHprime}~\\
+  In order for 
+  \begin{align}
+    (a_0^{-1} u a_0 ) \psi = a_0^{-1}(u (a_0 \psi)).
+    \label{eq:consistency_transf_HHprime}
+  \end{align}
+  to be satisfied, $\Delta$ and $U$ should satisfy 
+  \begin{align}
+    \Delta(a_0^{-1} u a_0) = (U^{-1})^* \Delta(u)^* U^*.
+    \label{eq:Delta_am1ua}
+  \end{align}
+\end{thm}
+\begin{proof}
+  We start from Eq. (\ref{eq:consistency_transf_HHprime}).
+  \begin{align}
+    \text{(LHS)} = \psi_j \Delta_{jk}(a_0^{-1} u a_0).
+  \end{align}
+  Using Proposition~\ref{prop:a01_Hprime_H},
   \begin{align}
     \text{(RHS)} &= 
     a_0^{-1} u (\varphi'_j U_{jk}) 
@@ -178,14 +234,42 @@ Here, we investigate the condition that the above Eqs. (\ref{eq:upsi})to (\ref{e
   Therefore, we get
   \begin{align}
     \Delta(a_0^{-1} u a_0) = (U^{-1})^* \Delta(u)^* U^*.
-    \label{eq:Delta_am1ua}
   \end{align}
-\end{enumerate}
+\end{proof}
 
-Now, we prove that the above two conditions [Eq. (\ref{eq:a0varphi_prime}) and (\ref{eq:Delta_am1ua})] are sufficient for $\Delta$ and $U$ to define a consistent corepresentation with the following three steps.
-\begin{enumerate}
-  \item When $u a_0 = a_0 v$, $u (a_0 \psi) = a_0 (v \psi)$.\\
-  Note that $v = a_0^{-1} u a_0$. If Eq. (\ref{eq:Delta_am1ua}) is satisfied, we have
+Let me here summarize the results so far.
+We started from Definition~\ref{dfn:starting_point} and got the formulas summarized in Table~\ref{table:operations_and_corep}.
+The summrized formulas satisfy $a_0(a_0 \psi_k) = a_0^2 \psi_k$ (Proposition~\ref{prop:a_0Hprime_H}), 
+$a_0^{-1} (a_0 \psi_k) = \psi_k$ (Proposition~\ref{prop:a01_Hprime_H}), and   $a_0^{-1} (a_0 \varphi'_k) = \varphi'_k$ (Proposition~\ref{prop:a01_H_Hprime}).
+In addition, we proved that $\Delta(a_0^{-1} u a_0) = (U^{-1})^* \Delta(u)^* U^*$ is necessary for $(a_0^{-1} u a_0 ) \psi = a_0^{-1}(u (a_0 \psi))$ (Theorem~\ref{thm:Consistency_HHprime}).
+\begin{table}[H]
+  \label{table:operations_and_corep}
+  \begin{center}
+    \caption{Construction of the corepresentation.} 
+\begin{tabular}{c|c}
+  symmetry operation & operation on the basis \\
+  \hline
+  $u: H\to H$ & $u \psi_k = \psi_j \Delta_{jk} (u)$ \\
+  $u: H'\to H'$ & $u \varphi'_k = \varphi'_j \Delta_{jk}(u)$ \\
+  $a_0: H \to H'$ & $a_0 \psi_k = \varphi'_j U_{jk}$\\
+  $a_0: H' \to H$ & $a_0 \varphi'_k = \psi_j (\Delta (a_0^2) (U^{-1})^*)_{jk} = \psi_j (\Delta (a_0^2) U^{T})_{jk}$\\
+  $a_0^{-1}: H' \to H$ & $a_0^{-1} \varphi'_k = \psi_j (U^{-1})^*_{jk} = \psi_j (U^{T})_{jk}$\\
+  $a_0^{-1}: H \to H'$ & $a_0^{-1} \psi_k = \varphi'_j (U \Delta(a_0^{-2})^*)_{jk} = \varphi'_j (U \Delta^T(a_0^{2}))_{jk}$
+ \end{tabular}
+\end{center}
+\end{table}
+
+Now, we prove that the above formulas and Theorem~\ref{thm:Consistency_HHprime} is sufficient to define a consistent corepresentation.
+
+\begin{lem}~\\
+  Assume that $u,v \in G$ satisfy $u a_0 = a_0 v$. Then, we can show that
+  \begin{align}
+    u (a_0 \psi_k) = a_0 (v \psi_k).
+  \end{align}
+\end{lem}
+
+\begin{proof}
+  Note that $v = a_0^{-1} u a_0$. If Eq. (\ref{eq:Delta_am1ua}) is satisfied (Theorem~\ref{thm:Consistency_HHprime}), we have
   \begin{align}
     a_0 v \psi_k 
     &= 
@@ -195,6 +279,10 @@ Now, we prove that the above two conditions [Eq. (\ref{eq:a0varphi_prime}) and (
     a_0 (a_0^{-1} (u (a_0\psi_k))).
   \end{align}
   Using Eq. (\ref{eq:inversea0_varphi}), the last line can be rewritten as $u (a_0\psi_k)$. Thus, we get $u (a_0 \psi) = a_0 (v \psi)$.
+\end{proof}
+ 
+
+\begin{enumerate}  
   \item $a_0^2 \varphi' = a_0 (a_0 \varphi')$.\\
   When Eq. (\ref{eq:a0varphi_prime}) is satisfied, we get 
   \begin{align}
