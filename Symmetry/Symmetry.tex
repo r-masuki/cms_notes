@@ -21,7 +21,7 @@
 \begin{document}
 \maketitle
 
-\section{Time-reversal and the representations of anti-unitary group}
+\section{Time-reversal and the representations of non-unitary group}
 This section is based on the discussion in the textbook by Inui, et al~\cite{inui2012group}.
 
 \subsection{Time-reversal operation}
@@ -36,7 +36,44 @@ If we define the time-reversal operator as
 \end{align}
 where $K$ is the complex conjugate operator.
 
-\subsection{non-unitary group and their representations}
+\subsection{non-unitary group and corepresentations}
+When the unitary operations $u_i, u_j, u_k$ satisfy $u_i u_j = u_k$, 
+\begin{align}
+  (\theta u_i) u_j = u_i (\theta u_j) = \theta u_k
+\end{align}
+\begin{align}
+  (\theta u_i) (\theta u_j) = (-1)^N u_k,
+\end{align}
+where $N$ is the number of electrons. The magnetic group $\bar{G}$ can be written as
+\begin{align}
+  \bar{G} = G + \theta G,
+\end{align}
+where $G$ is the set of unitary symmetry operations (symmetry operations without time-reversal).
+
+The corepresentations of the non-unitary group satisfy
+\begin{align}
+  u_1 u_2 \phi_k &= \sum_j \phi_j [D(u_1) D(u_2)]_{jk}
+  \label{eq:corepresentation_u1u2}
+  \\
+  u a \phi_k &= \sum_j \phi_j [D(u) D(a)]_{jk}
+  \label{eq:corepresentation_ua}
+  \\
+  au \phi_k &= \sum_j \phi_j [D(a) D^*(u)]_{jk}
+  \label{eq:corepresentation_au}
+  \\
+  a_1 a_2 \phi_k &= \sum_j \phi_j [D(a_1) D^*(a_2)]_{jk},
+  \label{eq:corepresentation_a1a2}
+\end{align}
+where $u, u_1, u_2$ are unitary operations and $a, a_1, a_2$ are anti-unitary operations in the group (We use this notation without explanation from here on).
+Two corepresentations $D$ and $D'$ are defined to be equivalent if there is a matrix $T$ that satisfy
+\begin{align}
+  D'(u) &= T^{-1} D(u) T
+  \label{eq:equiv_corep1}
+  \\
+  D'(a) &= T^{-1} D(a) T^*
+  \label{eq:equiv_corep2}
+\end{align}
+Note that the relation Eqs. (\ref{eq:corepresentation_u1u2}) to (\ref{eq:corepresentation_a1a2}) is unchanged by the transformation Eq. (\ref{eq:equiv_corep1}) and (\ref{eq:equiv_corep2}).
 
 
 
