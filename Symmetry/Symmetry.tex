@@ -206,8 +206,13 @@ Next, we investigate the inverse of $a_0$.
 \begin{thm}[Consistency of $u: H\to H$ and $u: H'\to H'$]\label{thm:Consistency_HHprime}~\\
   In order for 
   \begin{align}
-    (a_0^{-1} u a_0 ) \psi = a_0^{-1}(u (a_0 \psi)).
+    (a_0^{-1} u a_0 ) \psi_k = a_0^{-1}(u (a_0 \psi_k)).
     \label{eq:consistency_transf_HHprime}
+  \end{align}
+  and
+  \begin{align}
+    (a_0^{-1} u a_0 ) \varphi'_k = a_0^{-1}(u (a_0 \varphi'_k)).
+    \label{eq:consistency_transf_HHprime_varphi}
   \end{align}
   to be satisfied, $\Delta$ and $U$ should satisfy 
   \begin{align}
@@ -216,7 +221,7 @@ Next, we investigate the inverse of $a_0$.
   \end{align}
 \end{thm}
 \begin{proof}
-  We start from Eq. (\ref{eq:consistency_transf_HHprime}).
+  We start from Eq. (\ref{eq:consistency_transf_HHprime}) and do not consider Eq. (\ref{eq:consistency_transf_HHprime_varphi}) for a while.
   \begin{align}
     \text{(LHS)} = \psi_j \Delta_{jk}(a_0^{-1} u a_0).
   \end{align}
@@ -235,6 +240,54 @@ Next, we investigate the inverse of $a_0$.
   \begin{align}
     \Delta(a_0^{-1} u a_0) = (U^{-1})^* \Delta(u)^* U^*.
   \end{align}
+
+  Next, we show that Eq. (\ref{eq:consistency_transf_HHprime_varphi}) holds as well if Eq. (\ref{eq:Delta_am1ua}) is satisfied. We start from the RHS. Using Proposition~\ref{prop:a_0Hprime_H} and \ref{prop:a01_H_Hprime},
+  \begin{align}
+    \text{(RHS)}
+    &=
+    a_0^{-1}(u (a_0 \varphi'_k))
+    \nonumber
+    \\&=
+    a_0^{-1} (u( \psi_j (\Delta (a_0^2) U^{T})_{jk}))
+    \nonumber
+    \\&=
+    a_0^{-1} ( \psi_j (\Delta(u) \Delta (a_0^2) U^{T})_{jk})
+    \nonumber
+    \\&=
+    \varphi'_j (U \Delta^T(a_0^{2}) \Delta^*(u) \Delta^*(a_0^2) U^{\dag})_{jk}.
+    \label{eq:tmp258}
+  \end{align}
+  Here, substituting $a_0 u a_0^{-1}$ to $u$ in Eq. (\ref{eq:Delta_am1ua}), we get
+  \begin{align}
+    \Delta(u) = (U^{-1})^* \Delta(a_0 u a_0^{-1})^* U^*.
+  \end{align}
+  Thus, 
+  \begin{align}
+    U \Delta^T(a_0^{2}) \Delta^*(u) \Delta^*(a_0^2) U^{\dag}
+    &=
+    U \Delta^T(a_0^{2}) U^{-1} \Delta(a_0 u a_0^{-1}) U \Delta^*(a_0^2) U^{\dag}.
+    \label{eq:tmp269}
+  \end{align}
+  Here, substituting $u=a_0^2$ to Eq. (\ref{eq:Delta_am1ua}), we get
+  \begin{align}
+    \Delta(a_0^2) = (U^{-1})^* \Delta(a_0^2)^* U^*.
+  \end{align}
+  Therefore, substituting to Eq. (\ref{eq:tmp269}),
+  \begin{align}
+    U \Delta^T(a_0^{2}) \Delta^*(u) \Delta^*(a_0^2) U^{\dag} 
+    &= 
+    \Delta(a_0^{-2}) \Delta(a_0 u a_0^{-1}) \Delta(a_0^{2})
+    \nonumber
+    \\&=
+    \Delta(a_0^{-1} u a_0)
+  \end{align}
+  Thus, by substituting to the RHS of Eq. (\ref{eq:tmp258}),
+  we get
+  \begin{align}
+    a_0^{-1}(u (a_0 \varphi'_k)) 
+    = \varphi'_j \Delta_{jk}(a_0^{-1} u a_0) 
+    = (a_0^{-1} u a_0) \varphi'_k
+  \end{align}
 \end{proof}
 
 Let me here summarize the results so far.
@@ -242,6 +295,7 @@ We started from Definition~\ref{dfn:starting_point} and got the formulas summari
 The summrized formulas satisfy $a_0(a_0 \psi_k) = a_0^2 \psi_k$ (Proposition~\ref{prop:a_0Hprime_H}), 
 $a_0^{-1} (a_0 \psi_k) = \psi_k$ (Proposition~\ref{prop:a01_Hprime_H}), and   $a_0^{-1} (a_0 \varphi'_k) = \varphi'_k$ (Proposition~\ref{prop:a01_H_Hprime}).
 In addition, we proved that $\Delta(a_0^{-1} u a_0) = (U^{-1})^* \Delta(u)^* U^*$ is necessary for $(a_0^{-1} u a_0 ) \psi = a_0^{-1}(u (a_0 \psi))$ (Theorem~\ref{thm:Consistency_HHprime}).
+
 \begin{table}[H]
   \label{table:operations_and_corep}
   \begin{center}
@@ -261,10 +315,29 @@ In addition, we proved that $\Delta(a_0^{-1} u a_0) = (U^{-1})^* \Delta(u)^* U^*
 
 Now, we prove that the above formulas and Theorem~\ref{thm:Consistency_HHprime} is sufficient to define a consistent corepresentation.
 
-\begin{lem}~\\
+\begin{prop}\label{prop:a0a0m1_id}~
+  Assuming the formulas in Table~\ref{table:operations_and_corep},
+  \begin{align}
+    a_0 (a_0^{-1} \psi_k) &= \psi_k
+    \nonumber
+    \\
+    a_0 (a_0^{-1} \varphi'_k) &= \varphi'_k
+  \end{align}
+\end{prop}
+
+\begin{proof}
+  It is also possible to prove using the formulas in Table~\ref{table:operations_and_corep}, but we prove the lemma using Propositions~\ref{prop:a01_Hprime_H} and \ref{prop:a01_H_Hprime}.
+  Because $a_0^{-1} (a_0 \varphi'_k) = \varphi'_k$, 
+  we get $a_0 (a_0^{-1} (a_0 \varphi'_k)) = a_0 \varphi'_k$. As $ a_0 \varphi'_k$ spans a basis in $H$, we get $a_0 (a_0^{-1} \psi_k) = \psi_k$. We can show $ a_0 (a_0^{-1} \varphi'_k) = \varphi'_k$ in a similar way.
+\end{proof}
+
+\begin{lem}\label{lem:uv_psi}~\\
   Assume that $u,v \in G$ satisfy $u a_0 = a_0 v$. Then, we can show that
   \begin{align}
     u (a_0 \psi_k) = a_0 (v \psi_k).
+  \end{align}
+  \begin{align}
+    u (a_0 \varphi'_k) = a_0 (v \varphi'_k).
   \end{align}
 \end{lem}
 
@@ -278,74 +351,41 @@ Now, we prove that the above formulas and Theorem~\ref{thm:Consistency_HHprime} 
     \\&=
     a_0 (a_0^{-1} (u (a_0\psi_k))).
   \end{align}
-  Using Eq. (\ref{eq:inversea0_varphi}), the last line can be rewritten as $u (a_0\psi_k)$. Thus, we get $u (a_0 \psi) = a_0 (v \psi)$.
+  Using Proposition \ref{prop:a0a0m1_id}, the last line can be rewritten as $u (a_0\psi_k)$. Thus, we get $u (a_0 \psi) = a_0 (v \psi)$.
+  
+  $u (a_0 \varphi'_k) = a_0 (v \varphi'_k)$ can be shown similarly using $(a_0^{-1} u a_0)\varphi'_k = a_0^{-1} (u (a_0\varphi'_k))$ in Theorem~\ref{thm:Consistency_HHprime}.
 \end{proof}
  
+\begin{lem}~\\
+  The basis  $\varphi'_k$ of $H'$ satisfies
+  \begin{align}
+    a_0^2 \varphi'_k = a_0 (a_0 \varphi'_k)
+  \end{align}
+\end{lem}
 
-\begin{enumerate}  
-  \item $a_0^2 \varphi' = a_0 (a_0 \varphi')$.\\
-  When Eq. (\ref{eq:a0varphi_prime}) is satisfied, we get 
+\begin{proof}
+  We first get 
+  \begin{align}
+    a_0^2 \psi = a_0^{-1} (a_0^2 (a_0 \psi))
+  \end{align} 
+  by substituting $u=a_0$ to Eq (\ref{eq:consistency_transf_HHprime}). 
+  By multiplying $a_0$ from the left and using Proposition~\ref{prop:a0a0m1_id}, we get
+  \begin{align}
+    a_0(a_0^2 \psi) =  a_0^2 (a_0 \psi).
+    \label{eq:a0a02_psi}
+  \end{align}
+  On the other hand, we have 
   \begin{align}
     a_0^2 \psi = a_0 (a_0 \psi).
     \label{eq:a02psi}
   \end{align} 
-  In addition, we get $a_0^2 \psi = a_0^{-1} (a_0^2 (a_0 \psi))$ by substituting $u=a_0$ to Eq (\ref{eq:consistency_transf_HHprime}). Because the mapping from $H'$ to $H$ by $a_0^{-1}$ is defined as the inverse of $a_0$ [Eq. (\ref{eq:inversea0_varphi})], we get 
-  \begin{align}
-    a_0(a_0^2 \psi) =  a_0^2 (a_0 \psi).
-  \end{align}
-  Using Eq. (\ref{eq:a02psi}), we get 
+  according to Proposition~\ref{prop:a_0Hprime_H}.
+  Using Eq. (\ref{eq:a02psi}) in Eq. (\ref{eq:a0a02_psi}), we get 
   \begin{align}
     a_0(a_0(a_0 \psi)) =  a_0^2 (a_0 \psi).
   \end{align}
   Because $a_0 \psi$ spans a basis in $H'$, we get $a_0(a_0 \varphi') =  a_0^2 \varphi'$.
-  \item When $u a_0 = a_0 v$, $u (a_0 \varphi') = a_0 (v \varphi')$.\\
-  As $a_0 \varphi'$ spans a basis in $H$, we get
-  \begin{align}
-    u (a_0 (a_0 \varphi'_k)) = a_0 (v(a_0 \varphi'_k))
-  \end{align}
-  from Eq. (\ref{eq:consistency_transf_HHprime}). Using Eq. (\ref{eq:a02psi}) to the LHS, we get $u a_0^2 \varphi'_k$. Multiplying $a_0^{-2}$ from the left, 
-  \begin{align}
-    a_0^{-2} (\text{LHS}) &= a_0^{-2} (u a_0^{-2} \varphi')
-    \nonumber
-    \\&=
-    (a_0^{-2} u a_0^{-2}) \varphi'
-    \nonumber
-    \\&=
-    (a_0^{-1} (a_0^{-1} u a_0^{-1}) a_0)\varphi'
-    \nonumber
-    \\&=
-    (a_0^{-1} v a_0)\varphi'
-  \end{align}
-  On the other hand,
-  \begin{align}
-    a_0^{-2} (\text{RHS}) 
-    &=
-    a_0^{-2} (a_0 (v(a_0 \varphi')))
-    \nonumber
-    \\&=
-    a_0 (a_0^{-2} (v(a_0 \varphi')))
-    \nonumber
-    \\&=
-    a_0 (a_0^{-1} (a_0^{-1} (v(a_0 \varphi'))))
-    \\&=
-    a_0^{-1} (v(a_0 \varphi'))
-  \end{align}
-  From the first to the second line, we used the special case of $u (a_0 \psi) = a_0 (v \psi)$ (Note that $v(a_0 \varphi')) \in H$).
-  From the second to the third line, we use the inverse of Eq. (\ref{eq:a02_psi}). Note that we define the mapping $a_0^{-1}: H \to H'$ as the inverse of $a_0: H' \to H$.
-  Thus, we get
-  \begin{align}
-    (a_0^{-1} v a_0)\varphi' = a_0^{-1} (v(a_0 \varphi'))
-  \end{align}
-  $u (a_0 \varphi') = a_0 (v \varphi')$ can be proven in a similar way as $u (a_0 \psi) = a_0 (v \psi)$
-  \item For arbitrary $g_1, g_2 \in \bar{G}$, $(g_1 g_2) \psi = g_1 (g_2 \psi)$, $(g_1 g_2) \varphi' = g_1 (g_2 \varphi')$.\\
-  It can be proven by combining the above lemmas.
-
-
-\end{enumerate}
-
-
-
-
+\end{proof}
 
 
 
