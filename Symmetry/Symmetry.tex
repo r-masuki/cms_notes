@@ -83,8 +83,9 @@ We first start from an irreducible representation and a basis of $G$
 \end{align}
 Here, we define 
 \begin{align}
-  \psi'_k = a_0 \psi_k
+  \psi'_k = a_0 \psi_k.
 \end{align}
+We call the linear space spanned by the set $\{\psi_k\}_k$ as $H$ and the space spanned by $\{\psi'_k\}_k$ as $H'$.
 If we write the transformation of $\psi'$ as
 \begin{align}
   u \psi'_k = \sum_j \psi'_j \bar{\Delta}_{jk}(u),
@@ -117,13 +118,142 @@ We assume that $\bar{\Delta}(u) = \Delta^*(a_0^{-1} u a_0) = U^{-1} \Delta(u) U$
 Then, $\psi$ and $\varphi$ satisfies
 \begin{align}
   u \psi_k &= \psi_j \Delta_{jk} (u)
-  \nonumber
+  \label{eq:upsi}
   \\
   u \varphi'_k &= \varphi'_j \Delta_{jk}(u)
-  \nonumber
+  \label{eq:uvarphiprime}
   \\
   a_0 \psi_k &= \varphi'_j U_{jk}
+  \label{eq:a0psi}
 \end{align}
+Eqs. (\ref{eq:upsi}) and (\ref{eq:uvarphiprime}) defines the mappings $u: H \to H$, $u: H' \to H'$ respectively.
+Eq. (\ref{eq:a0psi}) defines the mapping $a_0: H\to H'$.
+
+Here, we investigate the condition that the above Eqs. (\ref{eq:upsi})to (\ref{eq:a0psi}) defines a consistent and a unique corepresentation.
+\begin{enumerate}
+  \item Corepresentation of $a_0$: $a_0 \varphi'_k=??$\\
+  We first investigate how $a_0$ operates to the elements in $H'$. We start from 
+  \begin{align}
+    a_0(a_0 \psi_k) = a_0^2 \psi. 
+    \label{eq:a02_psi}
+  \end{align}
+  Calculating each side separately, we get\\
+  \begin{align}
+    \text{(LHS)} = a_0 (\varphi'_j U_{jk}) = (a_0 \varphi') U^*
+  \end{align}
+  \begin{align}
+    \text{(RHS)} = a_0 (\varphi'_j U_{jk}) = \psi \Delta(a_0^2)
+  \end{align}
+  Thus,
+  \begin{align}
+    a_0 \varphi'_k = \psi_j (\Delta (a_0^2) (U^{-1})^*)_{jk} = \psi_j (\Delta (a_0^2) U^{T})_{jk}
+    \label{eq:a0varphi_prime}
+  \end{align}
+  In other words, Eq. (\ref{eq:a0varphi_prime}) specifies the mapping $a_0: H' \to H$ that satisfy Eq. (\ref{eq:a02_psi}).
+  \item consistency of the transformation in $H$ and $H'$\\
+  We start from the equation 
+  \begin{align}
+    (a_0^{-1} u a_0 ) \psi = a_0^{-1}(u (a_0 \psi)).
+    \label{eq:consistency_transf_HHprime}
+  \end{align}
+  \begin{align}
+    \text{(LHS)} = \psi_j \Delta_{jk}(a_0^{-1} u a_0).
+  \end{align}
+  To calculate the RHS, we use 
+  \begin{align}
+    a_0^{-1} \varphi'_k = \psi_j (U^{-1})^*_{jk} = \psi_j (U^{T})_{jk}, 
+    \label{eq:inversea0_varphi}
+  \end{align}
+  which is obtained from $a_0^{-1} (a_0 \psi_k) = \psi_k$.
+  \begin{align}
+    \text{(RHS)} &= 
+    a_0^{-1} u (\varphi'_j U_{jk}) 
+    \nonumber
+    \\&
+    = a_0^{-1} (\varphi'_j (\Delta(u)U)_{jk})
+    \nonumber
+    \\&=
+    \psi_j [(U^{-1})^* \Delta(u)^* U^*]_{jk}.
+  \end{align}
+  Therefore, we get
+  \begin{align}
+    \Delta(a_0^{-1} u a_0) = (U^{-1})^* \Delta(u)^* U^*.
+    \label{eq:Delta_am1ua}
+  \end{align}
+\end{enumerate}
+
+Now, we prove that the above two conditions [Eq. (\ref{eq:a0varphi_prime}) and (\ref{eq:Delta_am1ua})] are sufficient for $\Delta$ and $U$ to define a consistent corepresentation with the following three steps.
+\begin{enumerate}
+  \item When $u a_0 = a_0 v$, $u (a_0 \psi) = a_0 (v \psi)$.\\
+  Note that $v = a_0^{-1} u a_0$. If Eq. (\ref{eq:Delta_am1ua}) is satisfied, we have
+  \begin{align}
+    a_0 v \psi_k 
+    &= 
+    a_0 (a_0^{-1} u a_0)\psi_k
+    \nonumber
+    \\&=
+    a_0 (a_0^{-1} (u (a_0\psi_k))).
+  \end{align}
+  Using Eq. (\ref{eq:inversea0_varphi}), the last line can be rewritten as $u (a_0\psi_k)$. Thus, we get $u (a_0 \psi) = a_0 (v \psi)$.
+  \item $a_0^2 \varphi' = a_0 (a_0 \varphi')$.\\
+  When Eq. (\ref{eq:a0varphi_prime}) is satisfied, we get 
+  \begin{align}
+    a_0^2 \psi = a_0 (a_0 \psi).
+    \label{eq:a02psi}
+  \end{align} 
+  In addition, we get $a_0^2 \psi = a_0^{-1} (a_0^2 (a_0 \psi))$ by substituting $u=a_0$ to Eq (\ref{eq:consistency_transf_HHprime}). Because the mapping from $H'$ to $H$ by $a_0^{-1}$ is defined as the inverse of $a_0$ [Eq. (\ref{eq:inversea0_varphi})], we get 
+  \begin{align}
+    a_0(a_0^2 \psi) =  a_0^2 (a_0 \psi).
+  \end{align}
+  Using Eq. (\ref{eq:a02psi}), we get 
+  \begin{align}
+    a_0(a_0(a_0 \psi)) =  a_0^2 (a_0 \psi).
+  \end{align}
+  Because $a_0 \psi$ spans a basis in $H'$, we get $a_0(a_0 \varphi') =  a_0^2 \varphi'$.
+  \item When $u a_0 = a_0 v$, $u (a_0 \varphi') = a_0 (v \varphi')$.\\
+  As $a_0 \varphi'$ spans a basis in $H$, we get
+  \begin{align}
+    u (a_0 (a_0 \varphi'_k)) = a_0 (v(a_0 \varphi'_k))
+  \end{align}
+  from Eq. (\ref{eq:consistency_transf_HHprime}). Using Eq. (\ref{eq:a02psi}) to the LHS, we get $u a_0^2 \varphi'_k$. Multiplying $a_0^{-2}$ from the left, 
+  \begin{align}
+    a_0^{-2} (\text{LHS}) &= a_0^{-2} (u a_0^{-2} \varphi')
+    \nonumber
+    \\&=
+    (a_0^{-2} u a_0^{-2}) \varphi'
+    \nonumber
+    \\&=
+    (a_0^{-1} (a_0^{-1} u a_0^{-1}) a_0)\varphi'
+    \nonumber
+    \\&=
+    (a_0^{-1} v a_0)\varphi'
+  \end{align}
+  On the other hand,
+  \begin{align}
+    a_0^{-2} (\text{RHS}) 
+    &=
+    a_0^{-2} (a_0 (v(a_0 \varphi')))
+    \nonumber
+    \\&=
+    a_0 (a_0^{-2} (v(a_0 \varphi')))
+    \nonumber
+    \\&=
+    a_0 (a_0^{-1} (a_0^{-1} (v(a_0 \varphi'))))
+    \\&=
+    a_0^{-1} (v(a_0 \varphi'))
+  \end{align}
+  From the first to the second line, we used the special case of $u (a_0 \psi) = a_0 (v \psi)$ (Note that $v(a_0 \varphi')) \in H$).
+  From the second to the third line, we use the inverse of Eq. (\ref{eq:a02_psi}). Note that we define the mapping $a_0^{-1}: H \to H'$ as the inverse of $a_0: H' \to H$.
+  Thus, we get
+  \begin{align}
+    (a_0^{-1} v a_0)\varphi' = a_0^{-1} (v(a_0 \varphi'))
+  \end{align}
+  $u (a_0 \varphi') = a_0 (v \varphi')$ can be proven in a similar way as $u (a_0 \psi) = a_0 (v \psi)$
+  \item For arbitrary $g_1, g_2 \in \bar{G}$, $(g_1 g_2) \psi = g_1 (g_2 \psi)$, $(g_1 g_2) \varphi' = g_1 (g_2 \varphi')$.\\
+  It can be proven by combining the above lemmas.
+
+
+\end{enumerate}
 
 
 
