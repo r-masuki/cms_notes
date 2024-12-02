@@ -52,16 +52,16 @@ where $G$ is the set of unitary symmetry operations (symmetry operations without
 
 The corepresentations of the non-unitary group satisfy
 \begin{align}
-  u_1 u_2 \phi_k &= \sum_j \phi_j [D(u_1) D(u_2)]_{jk}
+  u_1 u_2 \psi_k &= \sum_j \psi_j [D(u_1) D(u_2)]_{jk}
   \label{eq:corepresentation_u1u2}
   \\
-  u a \phi_k &= \sum_j \phi_j [D(u) D(a)]_{jk}
+  u a \psi_k &= \sum_j \psi_j [D(u) D(a)]_{jk}
   \label{eq:corepresentation_ua}
   \\
-  au \phi_k &= \sum_j \phi_j [D(a) D^*(u)]_{jk}
+  au \psi_k &= \sum_j \psi_j [D(a) D^*(u)]_{jk}
   \label{eq:corepresentation_au}
   \\
-  a_1 a_2 \phi_k &= \sum_j \phi_j [D(a_1) D^*(a_2)]_{jk},
+  a_1 a_2 \psi_k &= \sum_j \psi_j [D(a_1) D^*(a_2)]_{jk},
   \label{eq:corepresentation_a1a2}
 \end{align}
 where $u, u_1, u_2$ are unitary operations and $a, a_1, a_2$ are anti-unitary operations in the group (We use this notation without explanation from here on).
@@ -79,15 +79,15 @@ Note that the relation Eqs. (\ref{eq:corepresentation_u1u2}) to (\ref{eq:corepre
 Here, we consider how to construct the corepresentations of $\bar{G}$ from the representations of its unitary part $G$.
 We first start from an irreducible representation and a basis of $G$
 \begin{align}
-  u \phi_k = \sum_{j = 1}^d \Delta_{jk}(u).
+  u \psi_k = \sum_{j = 1}^d \Delta_{jk}(u).
 \end{align}
 Here, we define 
 \begin{align}
-  \phi'_k = a_0 \phi_k
+  \psi'_k = a_0 \psi_k
 \end{align}
-If we write the transformation of $\phi'$ as
+If we write the transformation of $\psi'$ as
 \begin{align}
-  u \phi'_k = \sum_j \phi'_j \bar{\Delta}_{jk}(u),
+  u \psi'_k = \sum_j \psi'_j \bar{\Delta}_{jk}(u),
 \end{align}
 $\bar{\Delta}$ satisfies
 \begin{align}
@@ -95,16 +95,16 @@ $\bar{\Delta}$ satisfies
 \end{align}
 This is because
 \begin{align}
-  a_0^{-1} u a_0 \phi_k 
+  a_0^{-1} u a_0 \psi_k 
   &= 
   a_0^{-1}
   \sum_j
   \Bigl(
-    \phi'_j \bar{\Delta}_{jk}(u)  
+    \psi'_j \bar{\Delta}_{jk}(u)  
   \Bigr)
   \nonumber
   \\&=
-  \sum_j \phi_j \bar{\Delta}^*_{jk}(u)  
+  \sum_j \psi_j \bar{\Delta}^*_{jk}(u)  
 \end{align}
 Note that $\bar{\Delta}$ is an irreducible representation of $G$ as well.
 
@@ -112,17 +112,17 @@ Note that $\bar{\Delta}$ is an irreducible representation of $G$ as well.
 We first investigate the case that $\Delta$ and $\bar{\Delta}$ are equivalent.
 We assume that $\bar{\Delta}(u) = \Delta^*(a_0^{-1} u a_0) = U^{-1} \Delta(u) U$, and introduce a new basis
 \begin{align}
-  \phi'_k = \sum_j \varphi'_j U_{jk}.
+  \psi'_k = \sum_j \varphi'_j U_{jk}.
 \end{align}
 Then, $\psi$ and $\varphi$ satisfies
 \begin{align}
-  u \phi_k &= \phi_j \Delta_{jk} (u)
+  u \psi_k &= \psi_j \Delta_{jk} (u)
   \nonumber
   \\
-  u \varphi'_k = \varphi'_j \Delta_{jk}(u)
+  u \varphi'_k &= \varphi'_j \Delta_{jk}(u)
   \nonumber
   \\
-  a_0 \phi_k = \varphi'_j U_{jk}
+  a_0 \psi_k &= \varphi'_j U_{jk}
 \end{align}
 
 
