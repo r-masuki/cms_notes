@@ -36,7 +36,7 @@ If we define the time-reversal operator as
 \end{align}
 where $K$ is the complex conjugate operator.
 
-\subsection{non-unitary group and corepresentations}
+\subsection{Non-unitary group and corepresentations}
 When the unitary operations $u_i, u_j, u_k$ satisfy $u_i u_j = u_k$, 
 \begin{align}
   (\theta u_i) u_j = u_i (\theta u_j) = \theta u_k
@@ -74,6 +74,58 @@ Two corepresentations $D$ and $D'$ are defined to be equivalent if there is a ma
   \label{eq:equiv_corep2}
 \end{align}
 Note that the relation Eqs. (\ref{eq:corepresentation_u1u2}) to (\ref{eq:corepresentation_a1a2}) is unchanged by the transformation Eq. (\ref{eq:equiv_corep1}) and (\ref{eq:equiv_corep2}).
+
+\subsection{Construction of the corepresentations}
+Here, we consider how to construct the corepresentations of $\bar{G}$ from the representations of its unitary part $G$.
+We first start from an irreducible representation and a basis of $G$
+\begin{align}
+  u \phi_k = \sum_{j = 1}^d \Delta_{jk}(u).
+\end{align}
+Here, we define 
+\begin{align}
+  \phi'_k = a_0 \phi_k
+\end{align}
+If we write the transformation of $\phi'$ as
+\begin{align}
+  u \phi'_k = \sum_j \phi'_j \bar{\Delta}_{jk}(u),
+\end{align}
+$\bar{\Delta}$ satisfies
+\begin{align}
+  \bar{\Delta}_{jk} = \Delta^*_{jk} (a_0^{-1} u a_0).
+\end{align}
+This is because
+\begin{align}
+  a_0^{-1} u a_0 \phi_k 
+  &= 
+  a_0^{-1}
+  \sum_j
+  \Bigl(
+    \phi'_j \bar{\Delta}_{jk}(u)  
+  \Bigr)
+  \nonumber
+  \\&=
+  \sum_j \phi_j \bar{\Delta}^*_{jk}(u)  
+\end{align}
+Note that $\bar{\Delta}$ is an irreducible representation of $G$ as well.
+
+\subsubsection{The case that $\Delta$ and $\bar{\Delta}$ are equivalent}
+We first investigate the case that $\Delta$ and $\bar{\Delta}$ are equivalent.
+We assume that $\bar{\Delta}(u) = \Delta^*(a_0^{-1} u a_0) = U^{-1} \Delta(u) U$, and introduce a new basis
+\begin{align}
+  \phi'_k = \sum_j \varphi'_j U_{jk}.
+\end{align}
+Then, $\psi$ and $\varphi$ satisfies
+\begin{align}
+  u \phi_k &= \phi_j \Delta_{jk} (u)
+  \nonumber
+  \\
+  u \varphi'_k = \varphi'_j \Delta_{jk}(u)
+  \nonumber
+  \\
+  a_0 \phi_k = \varphi'_j U_{jk}
+\end{align}
+
+
 
 
 
