@@ -46,7 +46,7 @@ that satisfy the following condition.
   \begin{align}
     \Bigl[
       - \frac{\hbar^2}{2m} \frac{d^2}{dr^2} + \frac{l(l+1)\hbar^2}{2mr^2} + V(r)
-    \Bigr] rR^{\text{ps}}_l(r) = E_l r R^{\text{ps}}_l(r),
+    \Bigr] rR_l(r) = E_l r R_l(r),
   \end{align}
   where $V(r)$ is the original one-body potential which is independent of angular momentum $lm$.
   \item The pseudowavefunctions $R^{\text{ps}}_l(r)$ don't have zero-points inside the core region $r<r_c$ and satisfy the norm-conserving condition
@@ -61,7 +61,8 @@ that satisfy the following condition.
 \end{enumerate}
 
 \subsubsection{Generation of norm-conserving pseudopotentials}
-The generation of norm-conserving pseudopotentials are done as follows.
+The generation of norm-conserving pseudopotentials can be performed in several ways. HSC~\cite{PhysRevLett.43.1494} and BHS~\cite{PhysRevB.26.4199} determined some fixed ansatz of the pseudopotential and adjusted the parameters so that the pseudowavefunctions satisfy the desired properties.
+More simple method assumes the form of the pseudowavefunctions first and calculate the pseudopotential that gives the pseudowavefunction~\cite{10.1063/1.438197, G_P_Kerker_1980}, which workflow is explained below.
 \begin{enumerate}
   \item Calculate the original wavefunction $R_l(r)$.\\
   We start with solving the exact one-body problem for atoms. In case of DFT, we solve the all-electron DFT for atoms.
@@ -74,16 +75,18 @@ The generation of norm-conserving pseudopotentials are done as follows.
   \end{align}
 \end{enumerate}
 \subsubsection{Combination of norm-conserving potentials with DFT}
+\noindent
+\emph{1. Without core correction}\\
 The Kohn-Sham equation solved in all-electron DFT for atoms is 
 \begin{align}
   \Bigl[
     - \frac{\hbar^2}{2m} \frac{d^2}{dr^2} + \frac{l(l+1)\hbar^2}{2mr^2} +  v_{\text{ext}}(r) + v_H(r;n) + v_{xc}(r;n)
   \Bigr] rR_l(r) = E_l r R_l(r).
 \end{align}
-On the other hand, the Kohn-Sham equation with the pseudopotential will look like
+On the other hand, the Kohn-Sham equation with the pseudopotential should look like
 \begin{align}
   \Bigl[
-    - \frac{\hbar^2}{2m} \frac{d^2}{dr^2} + \frac{l(l+1)\hbar^2}{2mr^2} +  v^{\text{ps:ion}}_l(r) + v_H(r;n^{\text{ps}}) + v_{xc}(r;n^{\text{ps}} + n_c)
+    - \frac{\hbar^2}{2m} \frac{d^2}{dr^2} + \frac{l(l+1)\hbar^2}{2mr^2} +  v^{\text{ps:ion}}_l(r) + v_H(r;n^{\text{ps}}) + v_{xc}(r;n^{\text{ps}})
   \Bigr] rR^{\text{ps}}_l(r) = E_l r R^{\text{ps}}_l(r).
 \end{align}
 where
@@ -110,7 +113,7 @@ I suppose that  $V_{\text{local}}(r)$ is chosen by numerical reasons considering
 }
 where 
 \begin{align}
-  v^{\text{ps:ion}}_{l}(r) = V^{\text{ps}}_l(r) - v_H(r;n^{\text{ps}}) - v_{xc}(r;n).
+  v^{\text{ps:ion}}_{l}(r) = V^{\text{ps}}_l(r) - v_H(r;n^{\text{ps}}_{\text{atom}}) - v_{xc}(r;n^{\text{ps}}_{\text{atom}}).
 \end{align}
 
 \subsubsection{Approximations in norm-conserving pseudopotentials}
